@@ -5,7 +5,6 @@ import {
   Upload,
   X,
   GripVertical,
-  Play,
   Clock,
   ArrowRight,
   Download,
@@ -21,7 +20,7 @@ interface SceneCardProps {
   onUpdateScene: (sceneId: string, updates: Partial<Scene>) => void;
   onRemoveScene: (sceneId: string) => void;
   onGenerateScene: (sceneId: string) => void;
-  dragHandleProps?: any;
+  dragHandleProps?: React.HTMLProps<HTMLDivElement>;
 }
 
 const SceneCard: React.FC<SceneCardProps> = ({

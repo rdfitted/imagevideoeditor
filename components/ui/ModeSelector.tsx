@@ -13,36 +13,36 @@ const ModeSelector: React.FC<ModeSelectorProps> = ({ mode, setMode }) => {
     <div className="flex items-center bg-[var(--md-sys-color-surface-container)] border border-[var(--md-sys-color-outline-variant)] rounded-xl p-1">
       <button
         onClick={() => setMode("photo-editor")}
-        className={`flex items-center gap-2 px-4 py-2 rounded-lg md-label-large transition-all duration-200 ${
+        className={`flex items-center justify-center w-12 h-10 rounded-lg transition-all duration-200 ${
           mode === "photo-editor"
             ? "bg-[var(--md-sys-color-primary)] text-[var(--md-sys-color-on-primary)]"
             : "text-[var(--md-sys-color-on-surface-variant)] hover:bg-[var(--md-sys-color-surface-container-high)]"
         }`}
+        title="Photo Editor"
       >
-        <ImageIcon className="w-4 h-4" />
-        Photo Editor
+        <ImageIcon className="w-5 h-5" />
       </button>
       <button
         onClick={() => setMode("single")}
-        className={`flex items-center gap-2 px-4 py-2 rounded-lg md-label-large transition-all duration-200 ${
+        className={`flex items-center justify-center w-12 h-10 rounded-lg transition-all duration-200 ${
           mode === "single"
             ? "bg-[var(--md-sys-color-primary)] text-[var(--md-sys-color-on-primary)]"
             : "text-[var(--md-sys-color-on-surface-variant)] hover:bg-[var(--md-sys-color-surface-container-high)]"
         }`}
+        title="Single Video"
       >
-        <Video className="w-4 h-4" />
-        Single Video
+        <Video className="w-5 h-5" />
       </button>
       <button
         onClick={() => setMode("storyboard")}
-        className={`flex items-center gap-2 px-4 py-2 rounded-lg md-label-large transition-all duration-200 ${
+        className={`flex items-center justify-center w-12 h-10 rounded-lg transition-all duration-200 ${
           mode === "storyboard"
             ? "bg-[var(--md-sys-color-primary)] text-[var(--md-sys-color-on-primary)]"
             : "text-[var(--md-sys-color-on-surface-variant)] hover:bg-[var(--md-sys-color-surface-container-high)]"
         }`}
+        title="Storyboard"
       >
-        <Film className="w-4 h-4" />
-        Storyboard
+        <Film className="w-5 h-5" />
       </button>
     </div>
   );

@@ -20,7 +20,7 @@ import {
   useSortable,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Scene, createScene, updateScene, removeScene, cleanupAllSceneUrls } from "@/lib/storyboard";
+import { Scene, cleanupAllSceneUrls } from "@/lib/storyboard";
 import SceneCard from "./SceneCard";
 import ModelSelector from "./ModelSelector";
 
@@ -101,7 +101,7 @@ const StoryboardComposer: React.FC<StoryboardComposerProps> = ({
     // Create an empty scene - imageFile will be null until user uploads
     const newScene = {
       id: crypto.randomUUID(),
-      imageFile: null as any, // Will be set when user uploads
+      imageFile: null, // Will be set when user uploads
       prompt: "",
       aspectRatio: aspectRatio, // Use global aspect ratio
       operationName: null,
@@ -232,7 +232,7 @@ const StoryboardComposer: React.FC<StoryboardComposerProps> = ({
             {scenes.length === 0 ? (
               <div className="text-center py-8">
                 <div className="md-body-medium" style={{ color: 'var(--md-sys-color-on-surface-variant)' }}>
-                  Click "Add Scene" to get started
+                  Click &quot;Add Scene&quot; to get started
                 </div>
               </div>
             ) : (
