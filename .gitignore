@@ -38,6 +38,7 @@ logs/
 *.log
 .claude/
 ai_doc/
+CLAUDE.md
 
 # vercel
 .vercel
