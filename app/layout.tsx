@@ -17,11 +17,11 @@ const sourceCodePro = Source_Code_Pro({
 });
 
 export const metadata: Metadata = {
-  title: "Veo 3 Studio",
-  description: "A quickstart for the Gemini API with Veo 3",
-  // icons: {
-  //   icon: "/imgs/gemini_icon.svg",
-  // },
+  title: "Story Composer",
+  description: "Create stunning photos and videos with AI-powered tools. Multi-modal creative platform featuring Gemini 2.5 Flash image editing and Veo 3 video generation.",
+  icons: {
+    icon: "/imgs/gemini_icon.svg",
+  },
 };
 
 export default function RootLayout({

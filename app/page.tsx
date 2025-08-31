@@ -348,7 +348,7 @@ const VeoStudio: React.FC = () => {
     <div className="relative min-h-screen w-full md-surface">
       <div className="fixed top-6 left-6 z-20 hidden md:block">
         <h1 className="md-headline-medium md-surface-container-high px-4 py-2 rounded-xl border border-[var(--md-sys-color-outline-variant)] md-elevation-2">
-          Create Your Story
+          Story Composer
         </h1>
       </div>
       <div className="fixed top-6 right-6 z-20 hidden md:block">
