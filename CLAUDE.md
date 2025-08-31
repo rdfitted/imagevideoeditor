@@ -4,10 +4,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Next.js application for generating videos using Google's Veo 3 model and images using Gemini 2.5 Flash Image model via the Gemini API. 
+**Story Composer** - A comprehensive AI-powered creative platform that combines advanced photo editing with professional video generation. This Next.js application features three distinct creative modes using Google's Gemini 2.5 Flash and Veo 3 models.
+
+**Repository:** https://github.com/rdfitted/storycomposer
+
+**Creative Modes:**
+1. **Photo Editor** (Primary) - Multi-image chat interface with up to 50 reference images
+2. **Single Video** - Text-to-video and image-to-video generation  
+3. **Storyboard** - Multi-scene video project management
 
 **References:**
-- Official quickstart: https://github.com/google-gemini/veo-3-gemini-api-quickstart
+- Original quickstart: https://github.com/google-gemini/veo-3-gemini-api-quickstart
 - Veo 3 Documentation: https://ai.google.dev/gemini-api/docs/video?example=dialogue
 
 ## Development Commands

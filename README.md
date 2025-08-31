@@ -40,8 +40,8 @@ A comprehensive AI-powered creative platform that combines advanced photo editin
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/rdfitted/imagevideoeditor.git
-   cd imagevideoeditor
+   git clone https://github.com/rdfitted/storycomposer.git
+   cd storycomposer
    ```
 
 2. **Install dependencies**
