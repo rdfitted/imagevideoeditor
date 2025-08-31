@@ -19,9 +19,9 @@ const sourceCodePro = Source_Code_Pro({
 export const metadata: Metadata = {
   title: "Veo 3 Studio",
   description: "A quickstart for the Gemini API with Veo 3",
-  icons: {
-    icon: "/imgs/gemini_icon.svg",
-  },
+  // icons: {
+  //   icon: "/imgs/gemini_icon.svg",
+  // },
 };
 
 export default function RootLayout({
@@ -31,10 +31,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${manrope.variable} ${sourceCodePro.variable}`}>
-        <div className="bg-gray-200 text-stone-900">
-          <main>{children}</main>
-        </div>
+      <body className={`${manrope.variable} ${sourceCodePro.variable} md-surface`}>
+        <main>{children}</main>
       </body>
     </html>
   );

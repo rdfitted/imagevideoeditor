@@ -55,7 +55,7 @@ export async function POST(req: Request) {
   } catch (error: unknown) {
     console.error("Error downloading video:", error);
     return NextResponse.json(
-      { error: "Failed to download video" },
+      { error: "Failed to download video", details: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     );
   }

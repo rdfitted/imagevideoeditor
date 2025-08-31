@@ -341,7 +341,7 @@ export default function VideoPlayer({
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <div className="relative aspect-video overflow-hidden rounded-lg">
+      <div className="relative aspect-video overflow-hidden rounded-2xl border border-[var(--md-sys-color-outline-variant)]" style={{ backgroundColor: 'var(--md-sys-color-surface-container-low)' }}>
         <video
           ref={playerRef}
           src={src}
@@ -373,29 +373,27 @@ export default function VideoPlayer({
 
         {/* Bottom overlay trim bar (toggleable) */}
         {showTrimBar && (
-          <div className="absolute left-0 right-0 bottom-2 z-20 px-4">
-            <div className="backdrop-blur-sm bg-white/30 rounded-xl px-3 py-2">
-              <div className="flex items-center gap-3">
-                <span className="text-xs text-slate-800/90 min-w-8 text-center">
+          <div className="absolute left-0 right-0 bottom-3 z-20 px-4">
+            <div className="md-surface-container-high rounded-2xl px-4 py-3 border border-[var(--md-sys-color-outline-variant)] md-elevation-2">
+              <div className="flex items-center gap-4">
+                <span className="md-label-medium min-w-12 text-center" style={{ color: 'var(--md-sys-color-on-surface)' }}>
                   {formatTime(trimRange[0])}
                 </span>
-                <div className="relative flex-1 h-6 flex">
+                <div className="relative flex-1 h-8 flex">
                   <div
-                    className="absolute inset-y-0 left-0 pointer-events-none z-0"
+                    className="absolute inset-y-0 left-0 pointer-events-none z-0 rounded-lg"
                     style={{
                       width: `${(trimRange[0] / (duration || 1)) * 100}%`,
-                      backgroundColor: "rgba(0,0,0,0.5)",
-                      borderRadius: 8,
-                      height: 28,
+                      backgroundColor: "var(--md-sys-color-outline)",
+                      height: 32,
                     }}
                   />
                   <div
-                    className="absolute inset-y-0 right-0 pointer-events-none z-0"
+                    className="absolute inset-y-0 right-0 pointer-events-none z-0 rounded-lg"
                     style={{
                       width: `${(1 - trimRange[1] / (duration || 1)) * 100}%`,
-                      backgroundColor: "rgba(0,0,0,0.5)",
-                      borderRadius: 8,
-                      height: 28,
+                      backgroundColor: "var(--md-sys-color-outline)",
+                      height: 32,
                     }}
                   />
                   <div className="relative z-10 w-full">
@@ -411,33 +409,42 @@ export default function VideoPlayer({
                         rail: {
                           backgroundColor: "transparent",
                         },
-                        track: { height: 24, backgroundColor: "transparent" },
+                        track: { height: 28, backgroundColor: "transparent" },
                         handle: {
-                          width: 8,
-                          height: 28,
-                          borderRadius: 4,
-                          backgroundColor: "#000",
-                          borderColor: "#000",
+                          width: 10,
+                          height: 32,
+                          borderRadius: 6,
+                          backgroundColor: "var(--md-sys-color-primary)",
+                          borderColor: "var(--md-sys-color-primary)",
                           marginBottom: 10,
                         },
                       }}
                     />
                   </div>
                 </div>
-                <span className="text-xs text-slate-800/90 min-w-8 text-center">
+                <span className="md-label-medium min-w-12 text-center" style={{ color: 'var(--md-sys-color-on-surface)' }}>
                   {formatTime(trimRange[1])}
                 </span>
-                <div className="flex items-center gap-2 pl-1">
+                <div className="flex items-center gap-3 pl-2">
                   <button
                     onClick={handleTrim}
-                    className="inline-flex items-center gap-1 h-8 px-3 rounded-md backdrop-blur-sm bg-black/60 hover:bg-black/70 text-white text-xs cursor-pointer"
+                    className="inline-flex items-center gap-2 h-10 px-4 rounded-xl md-interactive transition-all duration-200 md-label-large cursor-pointer"
+                    style={{
+                      backgroundColor: 'var(--md-sys-color-primary)',
+                      color: 'var(--md-sys-color-on-primary)'
+                    }}
                   >
                     Cut
                   </button>
                   <button
                     onClick={handleResetTrim}
-                    className="inline-flex items-center gap-1 h-8 px-3 rounded-md backdrop-blur-sm bg-white/60 hover:bg-white/70 text-black text-xs cursor-pointer"
+                    className="inline-flex items-center gap-2 h-10 px-4 rounded-xl md-interactive transition-all duration-200 md-label-large cursor-pointer border border-[var(--md-sys-color-outline)]"
                     disabled={!isTrimmed}
+                    style={{
+                      backgroundColor: isTrimmed ? 'var(--md-sys-color-surface-container)' : 'var(--md-sys-color-surface-variant)',
+                      color: isTrimmed ? 'var(--md-sys-color-on-surface)' : 'var(--md-sys-color-on-surface-variant)',
+                      opacity: isTrimmed ? 1 : 0.6
+                    }}
                   >
                     Reset
                   </button>
@@ -449,11 +456,12 @@ export default function VideoPlayer({
       </div>
 
       {/* Controls below the video */}
-      <div className="p-4 text-white">
-        <div className="flex items-center gap-4 backdrop-blur-sm bg-white/30 rounded-xl px-3 py-2">
+      <div className="p-4">
+        <div className="flex items-center gap-4 md-surface-container-high rounded-2xl px-4 py-3 border border-[var(--md-sys-color-outline-variant)] md-elevation-1">
           <button
             onClick={handlePlayPause}
-            className="focus:outline-none text-black"
+            className="focus:outline-none md-interactive rounded-full p-2 transition-all duration-200"
+            style={{ color: 'var(--md-sys-color-on-surface)' }}
           >
             {playing ? (
               <Pause className="w-6 h-6" />
@@ -471,19 +479,20 @@ export default function VideoPlayer({
               onChange={handleSeekChange}
               onAfterChange={() => setSeeking(false)}
               styles={{
-                track: { backgroundColor: "#0ea5e9" },
-                handle: { backgroundColor: "#0ea5e9", borderColor: "#0ea5e9" },
+                track: { backgroundColor: "var(--md-sys-color-primary)" },
+                handle: { backgroundColor: "var(--md-sys-color-primary)", borderColor: "var(--md-sys-color-primary)" },
               }}
             />
           </div>
-          <div className="text-sm text-black">
+          <div className="md-label-large" style={{ color: 'var(--md-sys-color-on-surface)' }}>
             {formatTime(currentDisplaySeconds)} /{" "}
             {formatTime(totalDisplaySeconds)}
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <button
               onClick={toggleMute}
-              className="focus:outline-none text-black"
+              className="focus:outline-none md-interactive rounded-full p-2 transition-all duration-200"
+              style={{ color: 'var(--md-sys-color-on-surface)' }}
             >
               {muted || volume === 0 ? (
                 <VolumeX className="w-5 h-5" />
@@ -499,18 +508,19 @@ export default function VideoPlayer({
                 value={volume}
                 onChange={handleVolumeChange}
                 styles={{
-                  track: { backgroundColor: "white" },
-                  handle: { backgroundColor: "white", borderColor: "white" },
+                  track: { backgroundColor: "var(--md-sys-color-primary)" },
+                  handle: { backgroundColor: "var(--md-sys-color-primary)", borderColor: "var(--md-sys-color-primary)" },
                 }}
               />
             </div>
             <button
               onClick={() => setShowTrimBar((s) => !s)}
               title={showTrimBar ? "Hide trimmer" : "Show trimmer"}
-              className={`ml-1 focus:outline-none hover:opacity-80 text-black`}
+              className="focus:outline-none md-interactive rounded-full p-2 transition-all duration-200"
+              style={{ color: showTrimBar ? 'var(--md-sys-color-primary)' : 'var(--md-sys-color-on-surface)' }}
             >
               <Scissors
-                className={`w-5 h-5 transition-transform duration-150 ${
+                className={`w-5 h-5 transition-transform duration-200 ${
                   showTrimBar ? "rotate-270" : "rotate-0"
                 }`}
               />
@@ -518,7 +528,8 @@ export default function VideoPlayer({
             <button
               onClick={onDownload}
               title="Download"
-              className="ml-1 focus:outline-none text-black hover:opacity-80"
+              className="focus:outline-none md-interactive rounded-full p-2 transition-all duration-200"
+              style={{ color: 'var(--md-sys-color-on-surface)' }}
             >
               <Download className="w-5 h-5" />
             </button>

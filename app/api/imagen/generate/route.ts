@@ -11,29 +11,40 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
     const prompt = (body?.prompt as string) || "";
-    const model = (body?.model as string) || "imagen-4.0-fast-generate-001";
+    const model = (body?.model as string) || "gemini-2.5-flash-image-preview";
 
     if (!prompt) {
       return NextResponse.json({ error: "Missing prompt" }, { status: 400 });
     }
 
-    const resp = await ai.models.generateImages({
+    const resp = await ai.models.generateContent({
       model,
-      prompt,
-      config: {
-        aspectRatio: "16:9",
-      },
+      contents: prompt,
     });
 
-    const image = resp.generatedImages?.[0]?.image;
-    if (!image?.imageBytes) {
+    // Extract image data from the response
+    const candidate = resp.candidates?.[0];
+    if (!candidate?.content?.parts) {
+      return NextResponse.json({ error: "No content returned" }, { status: 500 });
+    }
+
+    // Find the image part in the response
+    let imageData = null;
+    for (const part of candidate.content.parts) {
+      if (part.inlineData) {
+        imageData = part.inlineData.data;
+        break;
+      }
+    }
+
+    if (!imageData) {
       return NextResponse.json({ error: "No image returned" }, { status: 500 });
     }
 
     return NextResponse.json({
       image: {
-        imageBytes: image.imageBytes,
-        mimeType: image.mimeType || "image/png",
+        imageBytes: imageData,
+        mimeType: "image/png",
       },
     });
   } catch (error) {

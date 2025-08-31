@@ -33,9 +33,24 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# logs and sensitive files
+logs/
+*.log
+.claude/
+ai_doc/
+
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+Thumbs.db

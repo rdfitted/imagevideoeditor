@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import NextImage from "next/image";
 import ModelSelector from "@/components/ui/ModelSelector";
+import AspectRatioSelector from "@/components/ui/AspectRatioSelector";
 
 interface ComposerProps {
   prompt: string;
@@ -18,6 +19,9 @@ interface ComposerProps {
 
   selectedModel: string;
   setSelectedModel: (model: string) => void;
+
+  aspectRatio: string;
+  setAspectRatio: (ratio: string) => void;
 
   canStart: boolean;
   isGenerating: boolean;
@@ -44,6 +48,8 @@ const Composer: React.FC<ComposerProps> = ({
   setPrompt,
   selectedModel,
   setSelectedModel,
+  aspectRatio,
+  setAspectRatio,
   canStart,
   isGenerating,
   startGeneration,
@@ -93,27 +99,27 @@ const Composer: React.FC<ComposerProps> = ({
   return (
     <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-20 w-[min(100%,48rem)] px-4">
       {showImageTools && (
-        <div className="mb-3 rounded-xl backdrop-blur-sm bg-white/30 p-3">
-          <div className="grid grid-cols-1 gap-3">
+        <div className="mb-4 rounded-2xl md-surface-container-high border border-[var(--md-sys-color-outline-variant)] p-4 md-elevation-2">
+          <div className="grid grid-cols-1 gap-4">
             <div>
               <div
-                className={`rounded-lg border-2 border-dashed p-4 cursor-pointer transition-colors ${
+                className={`rounded-xl border-2 border-dashed p-6 cursor-pointer md-interactive transition-all duration-200 ${
                   isDragging
-                    ? "bg-white/30 border-indigo-400"
-                    : "bg-white/10 border-gray-300/70 hover:bg-white/30"
+                    ? "border-[var(--md-sys-color-primary)] bg-[var(--md-sys-color-primary-container)]"
+                    : "border-[var(--md-sys-color-outline)] hover:border-[var(--md-sys-color-primary)] hover:bg-[var(--md-sys-color-surface-container-high)]"
                 }`}
                 onClick={handleOpenFileDialog}
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
               >
-                <div className="flex items-center gap-3 text-slate-800/80">
-                  <Upload className="w-5 h-5" />
+                <div className="flex items-center gap-4 text-[var(--md-sys-color-on-surface)]">
+                  <Upload className="w-6 h-6" style={{ color: 'var(--md-sys-color-primary)' }} />
                   <div>
-                    <div className="font-medium">
+                    <div className="md-label-large">
                       Drag & drop an image, or click to upload
                     </div>
-                    <div className="text-xs opacity-80">
+                    <div className="md-body-medium" style={{ color: 'var(--md-sys-color-on-surface-variant)' }}>
                       PNG, JPG, WEBP up to 10MB
                     </div>
                   </div>
@@ -127,37 +133,42 @@ const Composer: React.FC<ComposerProps> = ({
                 />
               </div>
 
-              <div className="flex items-center gap-2 mt-3">
+              <div className="flex items-center gap-3 mt-4">
                 <input
                   type="text"
                   value={imagePrompt}
                   onChange={(e) => setImagePrompt(e.target.value)}
                   placeholder="Describe the starting photo to generate..."
-                  className="flex-1 rounded-md bg-white/10 border border-white/20 px-3 py-2 placeholder-slate-800/60 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="flex-1 rounded-xl md-surface-container border border-[var(--md-sys-color-outline-variant)] px-4 py-3 md-body-large placeholder-[var(--md-sys-color-on-surface-variant)] focus:outline-none focus:ring-2 focus:ring-[var(--md-sys-color-primary)] focus:border-[var(--md-sys-color-primary)]"
+                  style={{ backgroundColor: 'var(--md-sys-color-surface-container)', color: 'var(--md-sys-color-on-surface)' }}
                 />
                 <button
                   onClick={generateWithImagen}
                   disabled={!imagePrompt.trim() || imagenBusy}
                   aria-busy={imagenBusy}
-                  className={`inline-flex items-center gap-2 px-3 py-2 rounded-md transition ${
+                  className={`inline-flex items-center gap-2 px-4 py-3 rounded-xl md-interactive md-label-large transition-all duration-200 ${
                     !imagePrompt.trim() || imagenBusy
                       ? "opacity-60 cursor-not-allowed"
-                      : "bg-black/80 hover:bg-black text-white cursor-pointer"
+                      : "md-interactive cursor-pointer"
                   }`}
+                  style={{
+                    backgroundColor: !imagePrompt.trim() || imagenBusy ? 'var(--md-sys-color-surface-variant)' : 'var(--md-sys-color-primary)',
+                    color: !imagePrompt.trim() || imagenBusy ? 'var(--md-sys-color-on-surface-variant)' : 'var(--md-sys-color-on-primary)'
+                  }}
                 >
                   {imagenBusy ? (
-                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <Loader2 className="w-5 h-5 animate-spin" />
                   ) : (
-                    <Wand2 className="w-4 h-4" />
+                    <Wand2 className="w-5 h-5" />
                   )}
                   {imagenBusy ? "Generating" : "Generate"}
                 </button>
               </div>
             </div>
             <div className="flex items-start justify-start">
-              <div className="mt-1">
+              <div className="mt-2">
                 {imageFile && (
-                  <div className="text-sm text-stone-700">
+                  <div className="md-body-medium" style={{ color: 'var(--md-sys-color-on-surface-variant)' }}>
                     Selected: {imageFile.name}
                   </div>
                 )}
@@ -167,7 +178,7 @@ const Composer: React.FC<ComposerProps> = ({
                     alt="Generated"
                     width={640}
                     height={360}
-                    className="max-h-48 rounded-md border w-auto h-auto"
+                    className="max-h-48 rounded-xl border border-[var(--md-sys-color-outline-variant)] w-auto h-auto"
                   />
                 )}
               </div>
@@ -175,61 +186,81 @@ const Composer: React.FC<ComposerProps> = ({
           </div>
         </div>
       )}
-      <div className="text-lg font-semibold text-slate-900/80 backdrop-blur-sm bg-white/30 px-3 py-1 rounded-lg border ">
-        <div className="flex items-center justify-between mb-3">
+      <div className="md-surface-container-highest border border-[var(--md-sys-color-outline-variant)] px-6 py-4 rounded-2xl md-elevation-3">
+        <div className="flex items-center justify-between mb-4">
           <button
             type="button"
             aria-pressed={showImageTools}
             onClick={() => setShowImageTools((s) => !s)}
-            className={`inline-flex items-center gap-2 pl-3 pr-3 py-2 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 transition ${
+            className={`inline-flex items-center gap-2 px-4 py-2 md-label-large rounded-xl md-interactive transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--md-sys-color-primary)] ${
               showImageTools
-                ? "bg-white/70  text-slate-900"
-                : "bg-white/50  text-slate-900 hover:bg-white/50"
+                ? "md-surface-container-high border border-[var(--md-sys-color-outline)]"
+                : "hover:bg-[var(--md-sys-color-surface-container)]"
             }`}
             title="Image to Video"
+            style={{
+              backgroundColor: showImageTools ? 'var(--md-sys-color-surface-container-high)' : 'transparent',
+              color: 'var(--md-sys-color-on-surface)'
+            }}
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-5 h-5" />
             Image
           </button>
 
-          <ModelSelector
-            selectedModel={selectedModel}
-            setSelectedModel={setSelectedModel}
-          />
+          <div className="flex items-center gap-3">
+            <AspectRatioSelector
+              selectedRatio={aspectRatio}
+              onRatioChange={setAspectRatio}
+              compact={true}
+              dropdownDirection="up"
+              forVideo={true}
+              selectedModel={selectedModel}
+            />
+            <ModelSelector
+              selectedModel={selectedModel}
+              setSelectedModel={setSelectedModel}
+            />
+          </div>
         </div>
 
         <textarea
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
           placeholder="Generate a video with text and frames..."
-          className="w-full bg-transparent focus:outline-none resize-none text-base font-normal placeholder-slate-800/60"
+          className="w-full bg-transparent focus:outline-none resize-none md-body-large"
+          style={{ color: 'var(--md-sys-color-on-surface)' }}
           rows={2}
         />
-        <div className="flex items-center justify-between mt-3">
-          <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between mt-4">
+          <div className="flex items-center gap-3">
             <button
               onClick={handleReset}
-              className="h-10 w-10 flex items-center justify-center bg-white/50 rounded-full hover:bg-white/70 cursor-pointer"
+              className="h-12 w-12 flex items-center justify-center rounded-full md-interactive transition-all duration-200 border border-[var(--md-sys-color-outline-variant)]"
+              style={{ backgroundColor: 'var(--md-sys-color-surface-container)' }}
               title="Reset"
             >
-              <RotateCcw className="w-5 h-5" />
+              <RotateCcw className="w-5 h-5" style={{ color: 'var(--md-sys-color-on-surface)' }} />
             </button>
           </div>
           <button
             onClick={startGeneration}
             disabled={!canStart || isGenerating}
             aria-busy={isGenerating}
-            className={`h-10 w-10 flex items-center justify-center rounded-full text-white transition ${
+            className={`h-12 w-12 flex items-center justify-center rounded-full md-interactive transition-all duration-200 ${
               !canStart || isGenerating
-                ? "bg-white/50 cursor-not-allowed"
-                : "bg-white/50 hover:bg-white/70 cursor-pointer"
+                ? "cursor-not-allowed opacity-60"
+                : "cursor-pointer"
             }`}
+            style={{
+              backgroundColor: !canStart || isGenerating ? 'var(--md-sys-color-surface-variant)' : 'var(--md-sys-color-primary)',
+              color: !canStart || isGenerating ? 'var(--md-sys-color-on-surface-variant)' : 'var(--md-sys-color-on-primary)'
+            }}
             title="Generate"
           >
             {isGenerating ? (
-              <div className="w-4 h-4 border-2 border-t-transparent border-black rounded-full animate-spin" />
+              <div className="w-5 h-5 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: 'var(--md-sys-color-on-surface-variant)', borderTopColor: 'transparent' }} />
             ) : (
-              <ArrowRight className="w-5 h-5 text-black" />
+              <ArrowRight className="w-5 h-5" />
             )}
           </button>
         </div>
