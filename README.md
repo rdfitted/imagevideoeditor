@@ -178,6 +178,8 @@ echo 'GEMINI_API_KEY="your-api-key-here"' > .env
 
 This project builds upon the [Google Gemini Veo 3 API Quickstart](https://github.com/google-gemini/veo-3-gemini-api-quickstart) and includes substantial enhancements for photo editing capabilities.
 
+For more information, visit [fitted-automation.com](https://fitted-automation.com/).
+
 ## 📄 License
 
 This project is licensed under the Apache License 2.0.
