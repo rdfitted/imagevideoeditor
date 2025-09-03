@@ -13,6 +13,8 @@ import VideoPlayer from "@/components/ui/VideoPlayer";
 import ModeSelector from "@/components/ui/ModeSelector";
 import StoryboardComposer from "@/components/ui/StoryboardComposer";
 import PhotoEditor from "@/components/ui/PhotoEditor";
+import AIEditor from "@/components/ui/AIEditor";
+import HomeCanvas from "@/components/ui/HomeCanvas";
 import { Scene, cleanupAllSceneUrls } from "@/lib/storyboard";
 
 type VeoOperationName = string | null;
@@ -21,7 +23,7 @@ const POLL_INTERVAL_MS = 5000;
 
 const VeoStudio: React.FC = () => {
   // Mode management
-  const [mode, setMode] = useState<"single" | "storyboard" | "photo-editor">("photo-editor");
+  const [mode, setMode] = useState<"single" | "storyboard" | "photo-editor" | "ai-editor" | "home-canvas">("photo-editor");
   
   // Single video state
   const [prompt, setPrompt] = useState(""); // Video prompt
@@ -358,6 +360,14 @@ const VeoStudio: React.FC = () => {
       {mode === "photo-editor" ? (
         <div className="min-h-screen pt-20">
           <PhotoEditor />
+        </div>
+      ) : mode === "ai-editor" ? (
+        <div className="min-h-screen pt-20">
+          <AIEditor />
+        </div>
+      ) : mode === "home-canvas" ? (
+        <div className="min-h-screen pt-20">
+          <HomeCanvas />
         </div>
       ) : mode === "single" ? (
         <div className="flex items-center justify-center min-h-screen pb-40 px-4">
