@@ -163,12 +163,12 @@ const HomeCanvas: React.FC<HomeCanvasProps> = () => {
         {/* Header */}
         <div className="text-center py-8 px-4">
           <h1 className="text-4xl md:text-5xl font-bold text-[var(--md-sys-color-primary)] mb-4">
-            Home Canvas
+            Product Placement
           </h1>
           <p className="text-lg text-[var(--md-sys-color-on-surface-variant)] max-w-3xl mx-auto">
-            Simply upload photos of product and scene, then drag your product onto a perfect spot.
+            Upload your product and scene images, then click where you want to place the product.
             <br />
-            Gemini will create a photorealistic composite.
+            AI will seamlessly integrate your product into the scene with realistic lighting and perspective.
           </p>
         </div>
 
@@ -208,12 +208,12 @@ const HomeCanvas: React.FC<HomeCanvasProps> = () => {
       {/* Header */}
       <div className="text-center py-8 px-4">
         <h1 className="text-4xl md:text-5xl font-bold text-[var(--md-sys-color-primary)] mb-4">
-          Home Canvas
+          Product Placement
         </h1>
         <p className="text-lg text-[var(--md-sys-color-on-surface-variant)] max-w-3xl mx-auto">
-          Simply upload photos of product and scene, then drag your product onto a perfect spot.
+          Upload your product and scene images, then click where you want to place the product.
           <br />
-          Gemini will create a photorealistic composite.
+          AI will seamlessly integrate your product into the scene with realistic lighting and perspective.
         </p>
       </div>
 
@@ -296,11 +296,11 @@ const HomeCanvas: React.FC<HomeCanvasProps> = () => {
             {isGenerating ? (
               <div>
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--md-sys-color-primary)] mx-auto mb-4"></div>
-                <p className="text-xl text-[var(--md-sys-color-on-surface-variant)]">Generating composite...</p>
+                <p className="text-xl text-[var(--md-sys-color-on-surface-variant)]">Creating realistic product placement...</p>
               </div>
             ) : (
               <p className="text-[var(--md-sys-color-on-surface-variant)]">
-                Drag the product onto a location in the scene, or simply click where you want it.
+                Click anywhere on the scene to position your product. AI will handle lighting, shadows, and perspective automatically.
               </p>
             )}
           </div>
